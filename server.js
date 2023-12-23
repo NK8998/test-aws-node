@@ -7,8 +7,8 @@ const cors = require('cors');
 app.options('*', cors()) 
 
  app.use(cors({
-   origin: ['https://main-kqa7.vercel.app', 'http://localhost:5173'],
-   credentials: true,
+   origin:'*',
+   // credentials: true,
  }));
 
 
