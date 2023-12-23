@@ -1,0 +1,186 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: rgb(15, 15, 15);
+}
+.wrapper{
+    display: flex;
+    gap: 1.5em;
+    justify-content: center;
+}
+.video-and-description{
+    max-width: 70vw;
+}
+
+.videoPlayer{
+    width: 100%;
+    aspect-ratio: 1552 / 1080;
+    max-height: 73vh;
+}
+
+.wrapper-for-video{
+    aspect-ratio: 1552 / 1080;
+    max-height: 73vh;
+
+}
+.right--item{
+    width: 400px;
+    height: 100vh;
+    background-color: red;
+    min-width: 100px;
+}
+
+.content{
+    contain: inline-size;
+}
+.controls{
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    margin-top: 10px;
+    padding-top: 10px;
+    /* background-color: brown; */
+    padding-bottom: 5px;
+}
+.bars-container{
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+    height: 4px;
+}
+.chapters-container{
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    gap: .2em;
+}
+.chapterSegments{
+    background-color: rgba(0, 0, 0, 0.253);
+    height: 4px;
+}
+.redBar{
+   display: flex;
+   gap: .2em;
+   position: absolute;
+   width: 100%;
+   z-index: 4;
+
+}
+.bufferBar{
+    display: flex;
+    gap: .2em;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    
+}
+.seekingBar{
+    display: flex;
+    gap: .2em;
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+
+    
+}
+.redBarandDot{
+    width: 100%;
+    position: absolute;
+    height: 4px;
+    z-index: 4;
+}
+.redDot{
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    background-color: red;
+    position: absolute;
+    left: 0%;
+    z-index: 4;
+    margin-top: -4.4px;
+    transform: scale(0);
+    transition: transform 50ms ease-in;
+    pointer-events: none;
+    margin-left: -2px;
+}
+
+.seekingBar .seekingSegments{
+    background-color: rgba(128, 128, 128, 0.774);
+    height: 4px;
+    pointer-events: all;
+}
+.greyBar{
+    background-color: rgba(128, 128, 128, 0.61);
+    height: 4px;
+    pointer-events: all;
+}
+.videoBar{
+    height: 4px;
+}
+.progressBar{
+    background-color: red;
+    pointer-events: all;
+}
+.titleDiv{
+    display: flex;
+    gap: .2em;
+    height: 10px;
+    font-size: 13px;
+    color: white;
+    opacity: 1;
+    width: 140px;
+    position: absolute;
+    height: 20px;
+    left: 0%;
+    bottom: 40px;
+    opacity: 0;
+
+
+}
+.bufferBarUpdated{
+    width: 0%;
+    background-color: blue;
+    height: 0px;
+}
+
+/* theatre mode styles */
+/* .videoPlayer{
+    height: 78vh;
+    max-height: none;
+}
+.absolute-container{
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    left: 0;
+    top: 0;
+    background-color: red;
+}
+
+.wrapper-for-video{
+    aspect-ratio: 1920 / 1080;
+    height: 78vh ;
+    background-color: rebeccapurple;
+    max-height: none;
+  
+     
+}
+.right--item{
+    margin-top: 80vh;
+} */
+/* theatre mode styles */
+@media(max-width: 64em){
+    .right--item{
+        display: none;
+    }
+    .wrapper-for-video{
+        max-width: 97vw;
+    }
+    .video-and-description{
+        max-width: none;
+    }
+}
+
