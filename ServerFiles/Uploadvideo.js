@@ -8,7 +8,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const ffprobePath = require('@ffprobe-installer/ffprobe').path;
 const firebase = require('firebase/app');
 const {getStorage, ref, uploadBytes,getDownloadURL} = require("firebase/storage")
-ffmpeg.setFfmpegPath(require('ffmpeg-static'));
+ffmpeg.setFfprobePath(ffprobePath);
 
 let nanoid;
 import('nanoid')
