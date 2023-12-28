@@ -61,44 +61,52 @@ const Uploadvideo = async (req, res) => {
       return resolution <= height;
     })
  
+  const uploadPromises = filteredResolutions.map(async (resolution) => {
+      return uploadResolution(resolution);
+    });
 
-
-    for (const resolution of filteredResolutions) {
+    const uploadResolution = async (resolution) => {
       const videoStorageRef = ref(
         storageFirebase,
         `videos/${videoFile.originalname}_${uniqueId}_${resolution}`
       );
       const temporaryDirectory = os.tmpdir();
 
-
       const uniqueFilename = `${resolution}_${videoFile.originalname}`;
 
       const outputPath = path.join(temporaryDirectory, uniqueFilename);
-        
-    
+
       let bitrate;
-      if (resolution === '1080') {
-        bitrate = '6000k';
-      } else if (resolution === '720') {
-        bitrate = '4000k';
-      } else if (resolution === '480') {
-        bitrate = '2000k';
-      } else if (resolution === '360') {
-        bitrate = '1000k';
-      } else if (resolution === '240') {
-        bitrate = '700k';
+      if (resolution === "1080") {
+        bitrate = "6000k";
+      } else if (resolution === "720") {
+        bitrate = "4000k";
+      } else if (resolution === "480") {
+        bitrate = "2000k";
+      } else if (resolution === "360") {
+        bitrate = "1000k";
+      } else if (resolution === "240") {
+        bitrate = "700k";
       }
-    
-      await transcodeVideo(temporaryFilePath, outputPath, resolution, width, bitrate);
-    
+
+      await transcodeVideo(
+        temporaryFilePath,
+        outputPath,
+        resolution,
+        width,
+        bitrate
+      );
+
       const videoBuffer = await fs.promises.readFile(outputPath);
       await uploadBytes(videoStorageRef, videoBuffer, videoMetadata);
-    
+
       const videoDownloadURL = await getDownloadURL(videoStorageRef);
-      const readableResolution = 'R' + resolution;
+      const readableResolution = "R" + resolution;
       videoUrls[readableResolution] = videoDownloadURL;
       console.log(`Uploaded ${resolution} video: ${videoDownloadURL}`);
-    }
+    };
+
+    await Promise.all(uploadPromises);
 
     fs.unlink(temporaryFilePath, (err) => {
       if (err) {
