@@ -60,11 +60,8 @@ const Uploadvideo = async (req, res) => {
     const filteredResolutions = resolutions.filter((resolution) => {
       return resolution <= height;
     })
- 
-  const uploadPromises = filteredResolutions.map(async (resolution) => {
-      return uploadResolution(resolution);
-    });
 
+    
     const uploadResolution = async (resolution) => {
       const videoStorageRef = ref(
         storageFirebase,
@@ -105,6 +102,11 @@ const Uploadvideo = async (req, res) => {
       videoUrls[readableResolution] = videoDownloadURL;
       console.log(`Uploaded ${resolution} video: ${videoDownloadURL}`);
     };
+ 
+  const uploadPromises = filteredResolutions.map(async (resolution) => {
+      return uploadResolution(resolution);
+    });
+
 
     await Promise.all(uploadPromises);
 
